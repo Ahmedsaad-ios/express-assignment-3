@@ -1,0 +1,53 @@
+1: What is the Node.js Event Loop?
+
+The Node.js Event Loop is a mechanism that allows Node.js 
+to perform non-blocking and asynchronous operations while using a single 
+main JavaScript thread. It continuously checks whether the Call Stack is 
+empty and processes completed asynchronous callbacks when they are ready 
+to be executed.
+
+2: What is Libuv and What Role Does It Play in Node.js?
+
+Libuv is a C library used by Node.js to provide asynchronous I/O operations. 
+It provides the Event Loop, a Thread Pool, and abstractions for 
+operating-system features such as file system and networking operations. 
+It helps Node.js perform asynchronous work without blocking the main JavaScript 
+thread.
+
+3: How Does Node.js Handle Asynchronous Operations Under the Hood?
+
+Node.js handles asynchronous operations using the Event Loop together 
+with operating-system asynchronous mechanisms and, for some operations, 
+libuv's Thread Pool. When an asynchronous operation is started, Node.js 
+does not wait for it to finish. The main JavaScript thread continues 
+executing other code. When the operation completes, its callback becomes 
+eligible to be processed by the Event Loop and executed on the main JavaScript 
+thread.
+
+4: What is the Difference Between the Call Stack, Event Queue, 
+and Event Loop in Node.js?
+
+The Call Stack keeps track of JavaScript functions that are currently being 
+executed. Queues hold callbacks or tasks that are ready to run. The Event 
+Loop coordinates their execution by checking the state of the JavaScript 
+thread and moving eligible callbacks to execution according to the Event 
+Loop phases.
+
+
+5: What is the Node.js Thread Pool and How to Set the Thread Pool Size?
+
+The Thread Pool is a group of worker threads provided by libuv that
+Node.js uses for certain operations that should not block the main 
+JavaScript thread, such as many file system operations, some DNS operations, 
+and some cryptographic operations. The default libuv Thread Pool size is 4.
+It can be changed using the UV_THREADPOOL_SIZE environment variable.
+
+
+6: How Does Node.js Handle Blocking and Non-Blocking Code Execution?
+
+Node.js executes JavaScript code on the main thread. Blocking code prevents 
+the main thread from processing other JavaScript work until the operation 
+finishes. Non-blocking operations allow Node.js to start an operation and 
+continue processing other work while waiting for that operation to complete. 
+Node.js uses asynchronous APIs, the Event Loop, operating-system capabilities, 
+and libuv to achieve non-blocking behavior.
